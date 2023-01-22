@@ -1,38 +1,130 @@
+#root {
+  --border-radius: 8px;
+  --color-primary: #b90e4d;
+  --color-secondary: #6e072d;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+nav {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: left;
+  background-color: #6e072d;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-items-container {
+  width: 1024px;
+  max-width: calc(100% - 20px);
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.searchbar-container {
+  width: 1024px;
+  max-width: calc(100% - 20px);
+  margin: 30px auto;
+  padding: 0 10px;
+}
+
+#searchbar {
+  width: 100%;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-radius: 8px;
+  border-style: solid;
+}
+
+nav ul {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+nav li {
+  padding: 1em 1.5em;
+  list-style-type: none;
+}
+
+nav li:hover {
+  background-color: #b90e4d;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-pointer:hover {
+  filter: brightness(85%);
+}
+
+.table-container {
+  width: 1024px;
+  max-width: calc(100% - 20px);
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+thead {
+  background-color: var(--color-secondary);
+  color: white;
+}
+
+#th-country:hover {
+  background-color: var(--color-primary);
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  padding: 3px 10px;
+  background-color: var(--color-secondary);
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+tbody tr:hover {
+  background-color: #6e072d52;
+}
+
+tbody tr:active {
+  background-color: #b90e4d60;
+}
+
+.col-country {
+  width: 30%;
+}
+.col-flag {
+  width: 15%;
+}
+.col-continents {
+  width: 15%;
+}
+.col-population {
+  width: 20%;
+}
+
+.pagination-button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+}
+
+#page-number {
+  color: white;
+  margin: 0.1rem 0;
 }
