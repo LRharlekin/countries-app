@@ -2,6 +2,7 @@
   --border-radius: 8px;
   --color-primary: #b90e4d;
   --color-secondary: #6e072d;
+  --card-padding: 1em 1.5em;
 }
 
 .App {
@@ -127,4 +128,40 @@ tbody tr:active {
 #page-number {
   color: white;
   margin: 0.1rem 0;
+}
+
+.country-container {
+  width: 1024px;
+  max-width: calc(100% - 20px);
+  margin: 30px auto;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-template-areas:
+    "headline headline"
+    "main sidebar";
+  gap: 30px 30px;
+}
+
+.country-headline {
+  grid-area: headline;
+}
+.country-main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.country-sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.country-card {
+  padding: var(--card-padding);
+  border: solid 1px var(--color-secondary);
+  border-radius: var(--border-radius);
 }
