@@ -6,7 +6,13 @@ export default function Navbar() {
     <nav>
       <div className="navbar-items-container">
         <ul>
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          <Link
+            to="/"
+            style={{
+              textDecoration: "none",
+              color: "white",
+            }}
+          >
             <li>All Countries 🌎</li>
           </Link>
         </ul>

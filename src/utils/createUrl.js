@@ -2,7 +2,7 @@ import React from "react";
 
 function createUrl(endpoint) {
   const BASE_URL_WITH_PARAMS =
-    "https://restcountries.com?fields=name,cioc,ccn3,currencies,capital,capitalInfo,continents,subregion,area,maps,languages,population,flag,flags,coatOfArms";
+    "https://restcountries.com?fields=name,cioc,cca3,currencies,capital,capitalInfo,continents,subregion,area,maps,languages,population,flag,flags,coatOfArms";
 
   const newUrl = new URL(BASE_URL_WITH_PARAMS);
 

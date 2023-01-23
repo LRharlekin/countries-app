@@ -29,13 +29,21 @@ const SortTable = ({ countries, isLoading, switchOrder, order }) => {
         </thead>
         <tbody>
           {countries.map((c) => (
-            <tr className="cursor-pointer" key={c.cioc ? c.cioc : c.ccn3}>
+            <tr key={c.cioc ? c.cioc : c.name.official}>
               <td className="col-country">{c.name.common}</td>
               <td className="col-flag">{c.flag}</td>
               <td className="col-continents">{c.continents[0]}</td>
               <td className="col-population">{c.population}</td>
               <td>
-                <Link to={"/country/" + c.cioc}>More info</Link>
+                <Link
+                  key={c.cioc ? c.cioc : c.ccn3}
+                  to={
+                    "/country/" +
+                    (c.cioc ? c.cioc : c.name.common.replace(/ .*/, ""))
+                  }
+                >
+                  More info
+                </Link>
               </td>
             </tr>
           ))}

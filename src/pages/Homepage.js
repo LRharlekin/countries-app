@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
-// import { useFetch } from "../hooks/useFetchTRAV";
-
-import axios from "axios";
 
 import { SearchBar } from "../components/SearchBar";
 import SortTable from "../components/SortTable";
 import Pagination from "../components/Pagination";
 import Navbar from "../components/Navbar";
 import { sortAsc, sortDesc } from "../utils/compareFuncs";
+import createUrl from "../utils/createUrl";
+import useFetch from "../hooks/useFetch";
 
 const COUNTRIES_PER_PAGE = 5;
 
 export default function Homepage() {
-  // const [url, setUrl] = useState(
-  //  "https://restcountries.com/v3.1/all?fields=latlng,borders,area,flag,continents,maps,population,currencies,capital,region,subregion,languages,name,cioc,ccn3"
-  // );
-  const url =
-    "https://restcountries.com/v3.1/all?fields=latlng,borders,area,flag,continents,maps,population,currencies,capital,region,subregion,languages,name,cioc,ccn3";
+  const url = createUrl("all");
   const [currentPage, setCurrentPage] = useState(1);
 
   const [countries, setCountries] = useState([]);
@@ -34,18 +29,13 @@ export default function Homepage() {
     }
     setCountries(sorted);
     setCurrentPage(1);
-    console.log(sorted.map((c) => c.name.common));
   };
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      setIsLoading(true);
-      const res = await axios.get(url);
-      setCountries(res.data);
-      setIsLoading(false);
-    };
-    fetchCountries();
-  }, []);
+  useFetch({
+    url,
+    setData: setCountries,
+    setIsLoading,
+  });
 
   // Get current countries
   const indexOfLastCountry = currentPage * COUNTRIES_PER_PAGE;

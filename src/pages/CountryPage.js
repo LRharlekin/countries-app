@@ -2,50 +2,102 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
 import createUrl from "../utils/createUrl";
-import { useFetch } from "../hooks/useFetchJHERR";
+import useFetch from "../hooks/useFetch";
 import { formatCountry } from "../utils/formatData";
 
 import Navbar from "../components/Navbar";
 
 function CountryPage() {
+  const [countryObj, setCountryObj] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
   const params = useParams();
   const { cioc: name } = params;
 
   const url = createUrl(name);
 
-  // const { data, isLoading, error } = useFetch(url);
-  const { data } = useFetch({
-    url,
-    onSuccess: () => {
-      console.log("success");
-    },
+  useFetch({
+    url: url,
+    setData: setCountryObj,
+    setIsLoading,
   });
-
-  console.log("CountryPage rendering");
-  console.log(data);
 
   return (
     <div>
       <Navbar />
       <div className="country-container">
-        <h1 className="country-headline">Greece</h1>
+        <h1 className="country-headline placeholder-glow">
+          {countryObj ? (
+            countryObj.name.common
+          ) : (
+            <span className="placeholder col-3"></span>
+          )}
+        </h1>
         <div className="country-main">
           <div className="country-card">
             <p>
-              Greece, officially referred to as the{" "}
-              <strong>Hellenic Republic</strong>, is a country with a{" "}
-              <strong>population of XXXXXX</strong> located in{" "}
-              <strong>Southern Europe</strong>.
+              {countryObj ? (
+                countryObj.name.common
+              ) : (
+                <span className="placeholder col-2"></span>
+              )}
+              , officially referred to as the{" "}
+              <strong>
+                {countryObj ? (
+                  countryObj.name.official
+                ) : (
+                  <span className="placeholder col-3"></span>
+                )}
+              </strong>
+              , is a country with a{" "}
+              <strong>
+                population of{" "}
+                {countryObj ? (
+                  countryObj.population
+                ) : (
+                  <span className="placeholder col-1"></span>
+                )}
+              </strong>{" "}
+              located in{" "}
+              <strong>
+                {countryObj ? (
+                  countryObj.subregion
+                ) : (
+                  <span className="placeholder col-2"></span>
+                )}
+              </strong>
+              .
             </p>
           </div>
 
           <div className="country-card">
             <h3>Quick Facts</h3>
             <ul>
-              <li>Capital: Athens</li>
-              <li>Population: XXXXXX</li>
-              <li>Language(s): YYYYYY</li>
-              <li>Currency/ies: Euro (€)</li>
+              <li>
+                Capital:{" "}
+                {countryObj ? (
+                  countryObj.capital
+                ) : (
+                  <span className="placeholder col-2"></span>
+                )}
+              </li>
+              <li>
+                Population:{" "}
+                {countryObj ? (
+                  countryObj.population
+                ) : (
+                  <span className="placeholder col-1"></span>
+                )}
+              </li>
+              <li>
+                Area:{" "}
+                {countryObj ? (
+                  countryObj.area
+                ) : (
+                  <span className="placeholder col-2"></span>
+                )}{" "}
+                km2
+              </li>
             </ul>
           </div>
         </div>
@@ -58,47 +110,10 @@ function CountryPage() {
             <h5>Coat of Arms</h5>
             <div>coatofarms.png</div>
           </div>
-          <div className="country-geography country-card">
-            <h5>Geography</h5>
-            <p>
-              <strong>Area:</strong> 52093 km2
-            </p>
-            <p>
-              <strong>Neighbouring countries:</strong>
-            </p>
-            <ul>
-              <li>Mazedonia</li>
-              <li>Turkey</li>
-              <li>Albania</li>
-            </ul>
-            <div className="country-map">google maps embed</div>
-          </div>
         </div>
       </div>
     </div>
   );
 }
-//   if (isLoading) return <h1>Country Page is LOADING...</h1>;
-//   if (error)
-//     return (
-//       <React.Fragment>
-//         <h1>Error on Country Page:</h1>
-//         <p>{error}</p>
-//       </React.Fragment>
-//     );
-//   console.log(data);
-//   const c = formatCountry(data);
-
-//   return (
-//     <div>
-//       <p>Country Page of</p>
-//     </div>
-//   );
-// }
-
-// createUrl
-// fetchData
-// formatData
-// display data
 
 export default CountryPage;
