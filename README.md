@@ -1,6 +1,24 @@
 # This project is live
 
 See the deployed build by following [this link](https://superb-empanada-4bb8ff.netlify.app/).
+I was able to complete the following features:
+
+1. Create a home page (component) that displays the country data.
+2. When user clicks on a country in the table on the Homepage, navigate to another page showing detailed information about that country. The URL for country detail will look like this: [https://restcountries.com/v3.1/name/{name](https://restcountries.com/v3.1/name/%7Bname)}
+3. Create a search field that allows users to search country by country name.
+4. Pagination / lazy loading
+5. Make use of the following react concepts:
+   - Use Functional React Component
+   - React hooks: useState, useEfect, useParams
+6. Use a CSS framework (I made use of some Bootstrap)
+7. Deploy the finished project.
+
+### Extra points
+
+I was also able to implement the following bonus requirements.
+
+- write a Custom Hook (I wrote a custom useFetch hook wrapping axios to executed the requests)
+- Implement sorting on the "name" field
 
 ## Getting Started with Create React App
 
