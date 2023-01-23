@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 
+// components
 import { SearchBar } from "../components/SearchBar";
 import SortTable from "../components/SortTable";
 import Pagination from "../components/Pagination";
 import Navbar from "../components/Navbar";
+
+// custom hook
+import useFetch from "../hooks/useFetch";
+
+// utils
 import { sortAsc, sortDesc } from "../utils/compareFuncs";
 import createUrl from "../utils/createUrl";
-import useFetch from "../hooks/useFetch";
+import getFilteredCountries from "../utils/getFilteredCountries";
 
 const COUNTRIES_PER_PAGE = 5;
 
 export default function Homepage() {
-  const url = createUrl("all");
   const [currentPage, setCurrentPage] = useState(1);
 
   const [countries, setCountries] = useState([]);
@@ -19,6 +24,26 @@ export default function Homepage() {
   const [error, setError] = useState(null);
 
   const [order, setOrder] = useState(null);
+  const [query, setQuery] = useState("");
+
+  const url = createUrl("all");
+
+  useFetch({
+    url,
+    setData: setCountries,
+    setIsLoading,
+    setError,
+  });
+
+  const filteredCountries = getFilteredCountries(query, countries);
+
+  // Get slice of currently displayed countries
+  const indexOfLastCountry = currentPage * COUNTRIES_PER_PAGE;
+  const indexOfFirstCountry = indexOfLastCountry - COUNTRIES_PER_PAGE;
+  const currentCountries = filteredCountries.slice(
+    indexOfFirstCountry,
+    indexOfLastCountry
+  );
 
   const sortByName = (order) => {
     const sorted = [...countries];
@@ -33,28 +58,13 @@ export default function Homepage() {
     setCurrentPage(1);
   };
 
-  useFetch({
-    url,
-    setData: setCountries,
-    setIsLoading,
-    setError,
-  });
-
-  // Get current countries
-  const indexOfLastCountry = currentPage * COUNTRIES_PER_PAGE;
-  const indexOfFirstCountry = indexOfLastCountry - COUNTRIES_PER_PAGE;
-  const currentCountries = countries.slice(
-    indexOfFirstCountry,
-    indexOfLastCountry
-  );
-
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
       <Navbar />
-      <SearchBar />
+      <SearchBar setQuery={setQuery} />
       <div className="table-container">
         <SortTable
           countries={currentCountries}
@@ -64,7 +74,7 @@ export default function Homepage() {
         />
         <Pagination
           countriesPerPage={COUNTRIES_PER_PAGE}
-          totalCountries={countries.length}
+          totalCountries={filteredCountries.length}
           paginate={paginate}
           currentPage={currentPage}
         />

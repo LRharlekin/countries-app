@@ -108,7 +108,7 @@ function CountryPage() {
             {countryObj ? (
               <img
                 src={countryObj.flags.png}
-                class="card-img-top"
+                className="card-img-top"
                 alt={`flags.${name}`}
               />
             ) : (
@@ -120,7 +120,7 @@ function CountryPage() {
             {countryObj ? (
               <img
                 src={countryObj.coatOfArms.png}
-                class="card-img-top"
+                className="card-img-top"
                 alt={`coat-of-arms-${name}`}
               />
             ) : (

@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-export const SearchBar = () => {
-  const [query, setQuery] = useState("");
-
-  console.log(query);
-
+export const SearchBar = ({ setQuery }) => {
   // Filter
   // countries.filter((c) => c.name.common.toLowerCase().includes(query));
 
