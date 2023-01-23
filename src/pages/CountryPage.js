@@ -105,12 +105,27 @@ function CountryPage() {
         <div className="country-sidebar">
           <div className="country-flag country-card">
             <h5>National Flag</h5>
-
-            {countryObj ? countryObj.flag : <div>nationalflag.png</div>}
+            {countryObj ? (
+              <img
+                src={countryObj.flags.png}
+                class="card-img-top"
+                alt={`flags.${name}`}
+              />
+            ) : (
+              <div>COAT-OF-ARMS.png</div>
+            )}
           </div>
           <div className="country-coat-of-arms country-card">
             <h5>Coat of Arms</h5>
-            <div>coatofarms.png</div>
+            {countryObj ? (
+              <img
+                src={countryObj.coatOfArms.png}
+                class="card-img-top"
+                alt={`coat-of-arms-${name}`}
+              />
+            ) : (
+              <div>COAT-OF-ARMS.png</div>
+            )}
           </div>
         </div>
       </div>
