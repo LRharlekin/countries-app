@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { SearchBar } from "../components/SearchBar";
 import SortTable from "../components/SortTable";
@@ -16,6 +16,8 @@ export default function Homepage() {
 
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   const [order, setOrder] = useState(null);
 
   const sortByName = (order) => {
@@ -35,6 +37,7 @@ export default function Homepage() {
     url,
     setData: setCountries,
     setIsLoading,
+    setError,
   });
 
   // Get current countries

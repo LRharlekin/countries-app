@@ -10,7 +10,7 @@ export default function useFetch(options) {
           const res = await axios.get(options.url);
           options.setData(res.data);
         } catch (err) {
-          throw new Error("Failed.");
+          options.setError(err);
         }
         options.setIsLoading(false);
       };

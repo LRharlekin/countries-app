@@ -3,13 +3,13 @@ import { useParams } from "react-router-dom";
 
 import createUrl from "../utils/createUrl";
 import useFetch from "../hooks/useFetch";
-import { formatCountry } from "../utils/formatData";
 
 import Navbar from "../components/Navbar";
 
 function CountryPage() {
   const [countryObj, setCountryObj] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const params = useParams();
   const { cioc: name } = params;
@@ -20,6 +20,7 @@ function CountryPage() {
     url: url,
     setData: setCountryObj,
     setIsLoading,
+    setError,
   });
 
   return (
@@ -104,7 +105,8 @@ function CountryPage() {
         <div className="country-sidebar">
           <div className="country-flag country-card">
             <h5>National Flag</h5>
-            <div>nationalflag.png</div>
+
+            {countryObj ? countryObj.flag : <div>nationalflag.png</div>}
           </div>
           <div className="country-coat-of-arms country-card">
             <h5>Coat of Arms</h5>
